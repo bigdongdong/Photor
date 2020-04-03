@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="81dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal">
+
+    <com.cxd.photor.views.RoundImageView
+        android:id="@+id/coverRIV"
+        android:scaleType="centerCrop"
+        android:layout_marginLeft="16.5dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="64dp"
+        android:layout_height="64dp"/>
+
+    <RelativeLayout
+        android:paddingLeft="16.5dp"
+        android:paddingRight="16.5dp"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        >
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/nameTV"
+                tools:text = "QQ"
+                android:textColor="#202020"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/countTV"
+                android:layout_marginTop="7dp"
+                tools:text = "747"
+                android:textColor="#D3d3d3"
+                android:textSize="11sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/right_arrow"
+            android:layout_width="12dp"
+            android:layout_height="12dp"/>
+
+        <TextView
+            android:id="@+id/photoCountTV"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:background="#05C25D"
+            android:textColor="#FFFFFF"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/arrow"
+            tools:text="13"
+            android:layout_width="23dp"
+            android:layout_height="23dp"/>
+
+
+        <View
+            android:id="@+id/lineView"
+            android:layout_alignParentBottom="true"
+            android:background="#50cacaca"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+    </RelativeLayout>
+</LinearLayout>

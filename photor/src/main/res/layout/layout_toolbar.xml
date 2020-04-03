@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#333333">
+    <ImageView
+        android:id="@+id/closeIV"
+        android:src="@drawable/toolbar_close_icon"
+        android:padding="14dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"/>
+
+    <TextView
+        android:id="@+id/titleTV"
+        android:textSize="18sp"
+        android:layout_toRightOf="@+id/closeIV"
+        android:textColor="#FFFFFF"
+        android:layout_centerVertical="true"
+        android:text="选择图片"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.cxd.photor.views.ConfirmView
+        android:id="@+id/confirmView"
+        android:layout_marginRight="10dp"
+        android:paddingTop="3.5dp"
+        android:paddingBottom="3.5dp"
+        android:paddingLeft="6.5dp"
+        android:paddingRight="6.5dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        tools:text="确定(4/9)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

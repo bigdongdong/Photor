@@ -1,0 +1,2 @@
+include ':app', ':photor', ':lib'
+rootProject.name='Photor'
