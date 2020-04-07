@@ -1,4 +1,4 @@
-package com.cxd.photor.views;
+package com.cxd.photor.activity.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,6 +7,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 
 /**
+ * create by cxd on 2020/4/7
  * 圆角ImageView
  */
 public class RoundImageView extends android.support.v7.widget.AppCompatImageView {

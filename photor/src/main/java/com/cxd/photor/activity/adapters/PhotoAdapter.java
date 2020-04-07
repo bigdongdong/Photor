@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cxd.photor.R;
-import com.cxd.photor.PhotoManager;
+import com.cxd.photor.PDataManager;
 import com.cxd.photor.model.ImgBean;
 import com.cxd.photor.utils.DensityUtil;
 
@@ -82,9 +82,9 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 if(index != -1){
-                    PhotoManager.getInstance().removeImg(bean);
+                    PDataManager.getInstance().removeImg(bean);
                 }else{
-                    PhotoManager.getInstance().addImg(bean);
+                    PDataManager.getInstance().addImg(bean);
                 }
             }
         });

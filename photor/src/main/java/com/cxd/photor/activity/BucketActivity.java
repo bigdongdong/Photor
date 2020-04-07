@@ -1,5 +1,7 @@
 package com.cxd.photor.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,14 +11,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cxd.eventbox.EventBoxSubscribe;
+import com.cxd.photor.PDataManager;
 import com.cxd.photor.R;
 import com.cxd.photor.activity.adapters.BucketAdapter;
-import com.cxd.photor.PhotoManager;
 import com.cxd.photor.model.ImgBean;
-import com.cxd.photor.views.ConfirmView;
+import com.cxd.photor.activity.views.ConfirmView;
+import com.cxd.photor.utils.Constant;
 
 import java.util.ArrayList;
 
+/**
+ * create by cxd on 2020/4/7
+ */
 public class BucketActivity extends BaseActivity {
 
     private ImageView closeIV ;
@@ -42,13 +48,13 @@ public class BucketActivity extends BaseActivity {
 
     @Override
     protected void initialize() {
-        PhotoManager.getInstance().init(9);
+        PDataManager.getInstance().init(9);
 
         recycler.setLayoutManager(new LinearLayoutManager(context,LinearLayout.VERTICAL,false));
         adapter = new BucketAdapter(context);
         recycler.setAdapter(adapter);
 
-        adapter.update(null,PhotoManager.getInstance().getBuckets(context));
+        adapter.update(null, PDataManager.getInstance().getBuckets(context));
     }
 
     @Override
@@ -61,15 +67,35 @@ public class BucketActivity extends BaseActivity {
         });
     }
 
+    /**
+     * 从Photor跳转，需要赋值limit
+     * @param context
+     * @param limit
+     */
+    public static void jump(Context context , int limit){
+        PDataManager.getInstance().init(limit);
+        if(context != null){
+            Intent intent = new Intent(context,BucketActivity.class);
+            context.startActivity(intent);
+        }
+    }
 
     @EventBoxSubscribe
-    public void onEventUpdate(ArrayList<ImgBean> photoList){
-        if(photoList == null){
+    public void onEvent(Integer event){
+        if(event == null || confirmView == null || adapter == null){
             return;
         }
-        Log.i("aaa", "BucketActivity: onEventUpdate" + photoList.size());
 
-        confirmView.setCount(photoList.size(),PhotoManager.getInstance().getTotalCount());
-        adapter.update(PhotoManager.getInstance().getSelectedList(),PhotoManager.getInstance().getBuckets(context));
+        switch(event){
+            case Constant.EVENTBOX_UPDATE:
+                confirmView.setCount(PDataManager.getInstance().getSelectedImgs().size(), PDataManager.getInstance().getLimit());
+                adapter.update(PDataManager.getInstance().getSelectedImgs(), PDataManager.getInstance().getBuckets(context));
+                break;
+            case Constant.EVENTBOX_COMMIT_FINISH:
+                finish();
+                break;
+            default:
+                break;
+        }
     }
 }

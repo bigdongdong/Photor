@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -19,7 +18,7 @@ import com.cxd.photor.model.BucketBean;
 import com.cxd.photor.model.ImgBean;
 import com.cxd.photor.utils.Constant;
 import com.cxd.photor.utils.DensityUtil;
-import com.cxd.photor.views.RoundImageView;
+import com.cxd.photor.activity.views.RoundImageView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -70,10 +69,7 @@ public class BucketAdapter extends RecyclerView.Adapter<BucketAdapter.ViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, PhotoActivity.class);
-                intent.putExtra(Constant.INTENT_DATA_LIST,(Serializable) bean.getList());
-                intent.putExtra(Constant.INTENT_BUCKET_NAME,bean.getName());
-                context.startActivity(intent);
+                PhotoActivity.jump(context,bean.getName(),bean.getList());
             }
         });
 

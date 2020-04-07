@@ -12,13 +12,13 @@
     <Button
         android:onClick="jumpToBucketActivity"
         android:textAllCaps="false"
-        android:text="jump to bucketActivity"
+        android:text="从文件选择"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <Button
         android:onClick="jumpToPhotoActivity"
         android:textAllCaps="false"
-        android:text="jump to photoActivity"
+        android:text="从相册选择"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

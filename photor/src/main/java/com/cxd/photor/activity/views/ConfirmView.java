@@ -1,13 +1,18 @@
-package com.cxd.photor.views;
+package com.cxd.photor.activity.views;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
-import android.widget.TextView;
+import android.view.View;
 
+import com.cxd.photor.PDataManager;
 import com.cxd.photor.utils.DensityUtil;
 
+
+/**
+ * create by cxd on 2020/4/7
+ */
 public class ConfirmView extends android.support.v7.widget.AppCompatTextView {
     private Context context ;
 
@@ -17,6 +22,13 @@ public class ConfirmView extends android.support.v7.widget.AppCompatTextView {
         this.context = context ;
 
         this.setCount(0,1);
+
+        this.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PDataManager.getInstance().commit();
+            }
+        });
     }
 
     /**
@@ -39,20 +51,5 @@ public class ConfirmView extends android.support.v7.widget.AppCompatTextView {
             this.setText("完成("+count+"/"+total+")");
         }
         this.setBackground(gd);
-    }
-
-
-
-    private GradientDrawable getBackground(int count){
-        GradientDrawable gd = new GradientDrawable();
-        if(count == 0){
-            gd.setColor(Color.parseColor("#434343"));
-            gd.setCornerRadius(DensityUtil.dp2px(context,4));
-
-        }else{
-            gd.setColor(Color.parseColor("#05C25D"));
-            gd.setCornerRadius(DensityUtil.dp2px(context,4));
-        }
-        return gd ;
     }
 }

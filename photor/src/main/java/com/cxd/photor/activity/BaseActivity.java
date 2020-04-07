@@ -15,6 +15,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.cxd.eventbox.EventBox;
 import com.cxd.photor.utils.DensityUtil;
 
+/**
+ * create by cxd on 2020/4/7
+ */
 public abstract class BaseActivity extends AppCompatActivity {
     protected Activity context ;
     @Override
@@ -37,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             if((context instanceof BucketActivity || context instanceof PhotoActivity)
                     && ContextCompat.checkSelfPermission(this, "android.permission.READ_EXTERNAL_STORAGE") ==
                     PackageManager.PERMISSION_DENIED){ //相册选择需要文件读取权限
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
                 return;
             }
         }
@@ -59,11 +62,22 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if(requestCode == 1 && grantResults != null && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if(grantResults != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
             setViews();
             initialize();
             setListeners();
         }
+
+//        if(permissions != null && permissions.length > 0 && permissions[0].equals("android.permission.READ_EXTERNAL_STORAGE")
+//                && grantResults != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+//
+//        }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        /*走onCancel回调*/
     }
 
     @Override

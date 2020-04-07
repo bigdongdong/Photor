@@ -18,11 +18,9 @@ import android.view.WindowManager;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-
 /**
- * Created by housenchao on 2017/7/6.
+ * create by cxd on 2020/4/7
  */
-
 public class DensityUtil {
 
 

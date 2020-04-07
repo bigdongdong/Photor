@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * create by cxd on 2020/4/7
+ */
 public class BucketBean implements Serializable {
     private String name ;
     private String coverUrl ;

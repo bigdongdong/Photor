@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal">
 
-    <com.cxd.photor.views.RoundImageView
+    <com.cxd.photor.activity.views.RoundImageView
         android:id="@+id/coverRIV"
         android:scaleType="centerCrop"
         android:layout_marginLeft="16.5dp"
