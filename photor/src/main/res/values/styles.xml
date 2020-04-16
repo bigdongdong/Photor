@@ -9,4 +9,11 @@
     </style>
 
 
+    <!--popwindow 渐变弹出动画-->
+    <style name="pop_animation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pop_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_out</item>
+    </style>
+
+
 </resources>

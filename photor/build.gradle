@@ -43,4 +43,7 @@ dependencies {
 
     //https://github.com/bigdongdong/EventBox
     implementation 'com.github.bigdongdong:EventBox:2.5'
+
+    //https://github.com/bigdongdong/ClipView
+    implementation 'com.github.bigdongdong:ClipView:1.1'
 }

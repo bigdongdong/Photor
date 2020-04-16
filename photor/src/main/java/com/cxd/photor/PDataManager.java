@@ -1,5 +1,6 @@
 package com.cxd.photor;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Build;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * create by cxd on 2020/4/7
@@ -195,7 +197,12 @@ public class PDataManager {
         switch(event){
             case Constant.EVENTBOX_UPDATE:
             case Constant.EVENTBOX_COMMIT_FINISH:
-                EventBox.getDefault().send(event, BucketActivity.class, PhotoActivity.class);
+                if(activities.contains(BucketActivity.class)){
+                    EventBox.getDefault().send(event,BucketActivity.class);
+                }
+                if(activities.contains(PhotoActivity.class)){
+                    EventBox.getDefault().send(event,PhotoActivity.class);
+                }
                 break;
             case Constant.EVENTBOX_EXCEED_LIMIT:
                 EventBox.getDefault().send(event, PhotoActivity.class);
@@ -213,5 +220,19 @@ public class PDataManager {
     public synchronized void commit(){
         sendEvent(Constant.EVENTBOX_COMMIT_FINISH);
         EventBox.getDefault().send(mSelectedList, Photor.class);
+    }
+
+    private List<Class<? extends Activity>> activities = new ArrayList<>();
+    public synchronized void addActivity(Activity activity){
+        activities.add(activity.getClass());
+    }
+    public synchronized void removeActivity(Activity activity){
+        Iterator<Class<? extends Activity>> it = activities.iterator();
+        while (it.hasNext()){
+            if(it.next() == activity.getClass()){
+                it.remove();
+                break;
+            }
+        }
     }
 }

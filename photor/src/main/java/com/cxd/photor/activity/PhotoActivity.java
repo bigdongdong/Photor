@@ -16,6 +16,7 @@ import com.cxd.eventbox.EventBoxSubscribe;
 import com.cxd.photor.PDataManager;
 import com.cxd.photor.R;
 import com.cxd.photor.activity.adapters.PhotoAdapter;
+import com.cxd.photor.activity.pop.PreViewPop;
 import com.cxd.photor.model.ImgBean;
 import com.cxd.photor.utils.Constant;
 import com.cxd.photor.utils.DensityUtil;
@@ -40,6 +41,7 @@ public class PhotoActivity extends BaseActivity {
     private String curBucketName ;
 
     private PhotoAdapter adapter ;
+    private PreViewPop preViewPop ;
 
     @Override
     protected int getLayoutId() {
@@ -56,6 +58,8 @@ public class PhotoActivity extends BaseActivity {
 
     @Override
     protected void initialize() {
+        preViewPop = new PreViewPop(context);
+
         curBucketName = getIntent().getStringExtra(Constant.INTENT_BUCKET_NAME);
         if(curBucketName == null){
             closeIV.setImageResource(R.drawable.toolbar_close_icon);
@@ -80,6 +84,12 @@ public class PhotoActivity extends BaseActivity {
             }
         });
         adapter = new PhotoAdapter(context);
+        adapter.setOnPreViewClickListener(new PhotoAdapter.OnPreViewClickListener() {
+            @Override
+            public void onPreViewListener(String url) {
+                preViewPop.show(R.layout.activity_photo,url);
+            }
+        });
         recycler.setAdapter(adapter);
 
         adapter.update(PDataManager.getInstance().getSelectedImgs(),photoList);

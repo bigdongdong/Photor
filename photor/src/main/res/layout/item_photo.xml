@@ -10,20 +10,27 @@
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-<!--    <View-->
-<!--        android:background="#05111111"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"/>-->
-
-    <TextView
-        android:id="@+id/tv"
-        android:gravity="center"
-        android:text="10"
-        android:textColor="#FFFFFF"
-        android:background="#05C25D"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
+    <View
+        android:id="@+id/coverView"
+        android:background="#44111111"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <RelativeLayout
+        android:id="@+id/selectRL"
         android:layout_alignParentRight="true"
-        android:layout_width="20dp"
-        android:layout_height="20dp"/>
+        android:layout_width="35dp"
+        android:layout_height="35dp">
+        <TextView
+            android:id="@+id/tv"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:text="10"
+            android:textColor="#FFFFFF"
+            android:background="#05C25D"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+    </RelativeLayout>
+
 </RelativeLayout>

@@ -48,8 +48,6 @@ public class BucketActivity extends BaseActivity {
 
     @Override
     protected void initialize() {
-        PDataManager.getInstance().init(9);
-
         recycler.setLayoutManager(new LinearLayoutManager(context,LinearLayout.VERTICAL,false));
         adapter = new BucketAdapter(context);
         recycler.setAdapter(adapter);

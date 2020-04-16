@@ -2,6 +2,7 @@ package com.cxd.photor.activity.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.cxd.photor.R;
 import com.cxd.photor.PDataManager;
 import com.cxd.photor.model.ImgBean;
@@ -21,17 +25,27 @@ import com.cxd.photor.utils.DensityUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * create by cxd on 2020/4/3
+ */
 public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> {
     private List<ImgBean> selectedList ; //选中的图片
     private List<ImgBean> beans ;
     private Context context ;
+    private OnPreViewClickListener mOnPreViewClickListener ;
 
     private final int vw ;
+    private final RequestOptions options = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE)
+            .placeholder(new ColorDrawable(Color.parseColor("#484848")));
 
     public PhotoAdapter(Context context) {
         this.context = context;
         beans = new ArrayList<>();
         vw = ( DensityUtil.getScreenWidth(context) - 3 * DensityUtil.dp2px(context,3) ) / 4 ;
+    }
+
+    public void setOnPreViewClickListener(OnPreViewClickListener onPreViewClickListener){
+        mOnPreViewClickListener = onPreViewClickListener;
     }
 
     public void update(List<ImgBean> selectedList , List<ImgBean> beans){
@@ -67,6 +81,8 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
             holder.tv.setBackground(gd);
             int position = index + 1 ; //当前是第几个
             holder.tv.setText(String.valueOf(position));
+
+            holder.coverView.setVisibility(View.VISIBLE);
         }else{
             /*未选中*/
             gd = new GradientDrawable();
@@ -75,16 +91,30 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
             gd.setCornerRadius(DensityUtil.dp2px(context,10));
             holder.tv.setBackground(gd);
             holder.tv.setText(null);
+            holder.coverView.setVisibility(View.GONE);
         }
-        Glide.with(context).load(bean.getUrl()).into(holder.iv);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        Glide.with(context)
+                .applyDefaultRequestOptions(options)
+                .load(bean.getUrl())
+                .into(holder.iv);
+
+        holder.selectRL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(index != -1){
                     PDataManager.getInstance().removeImg(bean);
                 }else{
                     PDataManager.getInstance().addImg(bean);
+                }
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mOnPreViewClickListener != null){
+                    mOnPreViewClickListener.onPreViewListener(bean.getUrl());
                 }
             }
         });
@@ -109,11 +139,19 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageView iv ;
         private TextView tv ;
+        private View coverView ;
+        private RelativeLayout selectRL ;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             iv = itemView.findViewById(R.id.iv);
             tv = itemView.findViewById(R.id.tv);
+            coverView = itemView.findViewById(R.id.coverView);
+            selectRL = itemView.findViewById(R.id.selectRL);
         }
+    }
+
+    public interface OnPreViewClickListener{
+        void onPreViewListener(String url);
     }
 }

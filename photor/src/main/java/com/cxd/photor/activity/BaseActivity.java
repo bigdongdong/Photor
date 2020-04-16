@@ -13,10 +13,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.cxd.eventbox.EventBox;
+import com.cxd.photor.PDataManager;
+import com.cxd.photor.Photor;
 import com.cxd.photor.utils.DensityUtil;
 
 /**
- * create by cxd on 2020/4/7
+ * create by cxd on 2020/4/3
  */
 public abstract class BaseActivity extends AppCompatActivity {
     protected Activity context ;
@@ -26,6 +28,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutId());
 
         context = this ;
+        PDataManager.getInstance().addActivity(this);
+
 
         /*沉浸式*/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -48,6 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setViews();
         initialize();
         setListeners();
+
     }
 
     protected abstract int getLayoutId();
@@ -78,6 +83,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void finish() {
         super.finish();
         /*走onCancel回调*/
+        if(PDataManager.getInstance().getSelectedImgs() == null
+                || PDataManager.getInstance().getSelectedImgs().size() == 0){
+            Photor.getInstance().reset(); //重置
+        }
+
+        PDataManager.getInstance().removeActivity(this);
     }
 
     @Override

@@ -24,6 +24,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * create by cxd on 2020/4/3
+ */
 public class BucketAdapter extends RecyclerView.Adapter<BucketAdapter.ViewHolder> {
     private List<ImgBean> selectedList ; //选中的图片
     private List<BucketBean> beans ;

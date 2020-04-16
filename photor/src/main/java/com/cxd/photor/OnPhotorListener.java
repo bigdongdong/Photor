@@ -12,9 +12,9 @@ public interface OnPhotorListener {
 
     /**
      * @param IMGs 图片集
-     * @param SOURCE 图片源头（相机或相册）: Constant.PHOTO_SOURCE_CAMERA or Constant.PHOTO_SOURCE_ALBUM
+     * @param source 图片源头（相机或相册）EMSource.CAMERA or EMSource.ALBUM
      */
-    void onSuccess(List<ImgBean> IMGs ,String SOURCE);
+    void onSuccess(List<ImgBean> IMGs , EMSource source);
 
 //    void onError();
 
