@@ -18,8 +18,8 @@
     <RelativeLayout
         android:id="@+id/selectRL"
         android:layout_alignParentRight="true"
-        android:layout_width="35dp"
-        android:layout_height="35dp">
+        android:layout_width="40dp"
+        android:layout_height="40dp">
         <TextView
             android:id="@+id/tv"
             android:layout_alignParentRight="true"

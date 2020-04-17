@@ -102,7 +102,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
         holder.selectRL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(index != -1){
+                if(selectedList != null && index != -1){
                     PDataManager.getInstance().removeImg(bean);
                 }else{
                     PDataManager.getInstance().addImg(bean);
