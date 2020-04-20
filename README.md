@@ -63,7 +63,7 @@
                 .context(this)
                 .crop(400,400)              //裁剪参数，即最终返回的图片的宽高 [不写这行则不裁剪]
                 .onPhotorListener(onPhotorListener)
-                .requestImgsFromDirectory(9);       //从相册选择，最多选择9张
+                .requestImgsFromAlbum(9);       //从相册选择，最多选择9张
 		
 		
 	//清除Photor缓存，缓存有两部分组成：裁剪后的图片，以及拍照的原图
