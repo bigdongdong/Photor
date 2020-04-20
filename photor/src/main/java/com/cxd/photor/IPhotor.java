@@ -8,8 +8,8 @@ public interface IPhotor {
     void requestImgFromCamera();
 
     /*直接选择图片*/
-    void requestImgs(int limit);
+    void requestImgsFromAlbum(int limit);
 
     /*从相册选择图片*/
-    void requestImgsFromAlbum(int limit);
+    void requestImgsFromDirectory(int limit);
 }

@@ -3,10 +3,12 @@ package com.cxd.photor;
 
 import android.content.Context;
 import android.provider.ContactsContract;
+import android.util.Log;
 
 import com.cxd.eventbox.EventBox;
 import com.cxd.eventbox.EventBoxSubscribe;
 import com.cxd.photor.activity.BucketActivity;
+import com.cxd.photor.activity.CameraActivity;
 import com.cxd.photor.activity.ClipActivity;
 import com.cxd.photor.activity.PhotoActivity;
 import com.cxd.photor.model.ImgBean;
@@ -38,7 +40,6 @@ public class Photor implements IPhotor{
     }
 
     /**
-     *
      * @param context 跳转activity所需要的context， 本类不会长期持有context
      * @return
      */
@@ -76,6 +77,7 @@ public class Photor implements IPhotor{
     @Override
     public void requestImgFromCamera() {
         mSource = EMSource.CAMERA ;
+        CameraActivity.jump(mContext);
     }
 
     /**
@@ -83,7 +85,7 @@ public class Photor implements IPhotor{
      * @param limit
      */
     @Override
-    public void requestImgs(int limit) {
+    public void requestImgsFromAlbum(int limit) {
         mSource = EMSource.ALBUM ;
         PhotoActivity.jump(mContext,limit);
     }
@@ -93,29 +95,38 @@ public class Photor implements IPhotor{
      * @param limit
      */
     @Override
-    public void requestImgsFromAlbum(int limit) {
+    public void requestImgsFromDirectory(int limit) {
         mSource = EMSource.ALBUM ;
         BucketActivity.jump(mContext,limit);
     }
 
     /**
      * 清除裁剪缓存
-     * @param context
+     * 建议在每次request之前调用
+     * @return 是否clear成功
      */
-    public synchronized void clearCropCache(Context context){
-        File file = new File(context.getExternalCacheDir().getPath() + "/clipcache");
-        if(!file.exists() || !file.isDirectory()){
-            return;
+    public synchronized boolean clearCache(){
+        if(mContext == null){
+            return false;
+        }
+        File directory = new File(mContext.getExternalCacheDir().getPath() + "/Photor");
+        if(!directory.exists() || !directory.isDirectory()){
+            return true;
         }
 
         try{
-            File[] files = file.listFiles();
+            File[] files = directory.listFiles();
             for(File f : files){
                 f.delete();
             }
-            file.delete();
-        }catch (Exception e){}
+            directory.delete();
+        }catch (Exception e){
+            return false ;
+        }finally {
+            reset();
+        }
 
+        return !directory.exists() || !directory.isDirectory() ;
     }
 
     @EventBoxSubscribe
@@ -130,9 +141,7 @@ public class Photor implements IPhotor{
             mCropWidth = mCropHeight = 0 ;
         }else{
             mPhotoListener.onSuccess(imgs,mSource);
-
             reset();
-
         }
 
     }
@@ -143,6 +152,7 @@ public class Photor implements IPhotor{
         mCropWidth = mCropHeight = 0 ;
         mContext = null ; //释放context，避免造成内存泄漏
         mPhotoListener = null ;
+        PDataManager.getInstance().init(1);
     }
 
 }

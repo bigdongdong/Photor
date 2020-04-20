@@ -6,37 +6,262 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
+
+    android:id="@+id/nsv"
     >
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:paddingTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25sp"
+            android:textColor="#111111"
+            android:text="Photor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <!--裁剪配置-->
         <LinearLayout
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/filesButton"
-                android:onClick="onClick"
-                android:textAllCaps="false"
-                android:text="从文件选择(裁剪)"
+            <TextView
+                android:textSize="20sp"
+                android:textColor="#111111"
+                android:text="裁剪配置："
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-            <Button
-                android:id="@+id/photosButton"
-                android:onClick="onClick"
-                android:textAllCaps="false"
-                android:text="从相册选择"
+            <View
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="#77333333"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+            <!--是否裁剪-->
+            <RadioGroup
+                android:id="@+id/isCropRG"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp">
+                <TextView
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:text="是否裁剪："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <RadioButton
+                    android:id="@+id/cropRBTrue"
+                    android:textColor="#333333"
+                    android:text="是"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <RadioButton
+                    android:id="@+id/cropRBFalse"
+                    android:checked="true"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#333333"
+                    android:text="否"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+            <!--裁剪工具-->
+            <RadioGroup
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp">
+                <TextView
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:text="裁剪工具："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <RadioButton
+                    android:checked="true"
+                    android:textColor="#333333"
+                    android:text="ClipView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RadioGroup>
+            <!--裁剪尺寸-->
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp">
+                <TextView
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:text="裁剪尺寸："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/cropWidthET"
+                    android:gravity="center"
+                    android:text="400"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="x"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/cropHeightET"
+                    android:gravity="center"
+                    android:text="400"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:text="(px)"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+        <!--选择配置-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="20sp"
+                android:textColor="#111111"
+                android:text="选择配置："
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            <View
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="#77333333"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+            <!--从哪选择-->
+            <RadioGroup
+                android:id="@+id/selectRG"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp">
+                <TextView
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:text="从哪选择："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <RadioButton
+                    android:id="@+id/selectFromAblumRB"
+                    android:checked="true"
+                    android:textColor="#333333"
+                    android:text="相册"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <RadioButton
+                    android:id="@+id/selectFromDirectoryRB"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#333333"
+                    android:text="文件"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RadioGroup>
+            <!--最多限制-->
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp">
+                <TextView
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:text="张数限制："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/selectLimitET"
+                    android:gravity="center"
+                    android:text="1"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="张"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <!--操作-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="20sp"
+                    android:textColor="#111111"
+                    android:text="操作："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <View
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#77333333"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <Button
+                    android:id="@+id/clearCacheButton"
+                    android:layout_marginTop="10dp"
+                    android:text="清空缓存"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <!--进行选择-->
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <Button
+                    android:id="@+id/cameraButton"
+                    android:text="拍照"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/selectButton"
+                    android:layout_marginLeft="20dp"
+                    android:text="选择照片"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

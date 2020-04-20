@@ -119,13 +119,13 @@ public class ClipActivity extends BaseActivity {
             return null ;
         }
 
-        File file = new File(context.getExternalCacheDir().getPath() + "/clipcache");
+        File file = new File(context.getExternalCacheDir().getPath() + "/Photor");
         if(!file.exists()){
-            file.mkdir();
+            file.mkdirs();
         }
 
         long now = System.currentTimeMillis();
-        file = new File(file.getPath() + "/" + now + ".jpeg");
+        file = new File(file,now + ".jpg");
 
         try {
             FileOutputStream out = new FileOutputStream(file);

@@ -2,11 +2,14 @@ package com.cxd.photor_demo;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.media.Image;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,25 +18,36 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cxd.photor.EMSource;
 import com.cxd.photor.OnPhotorListener;
 import com.cxd.photor.Photor;
+import com.cxd.photor.activity.CameraActivity;
 import com.cxd.photor.model.ImgBean;
 import com.cxd.photor.utils.DensityUtil;
 
 import java.io.File;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnPhotorListener{
+public class MainActivity extends AppCompatActivity implements OnPhotorListener , View.OnClickListener {
 
+
+    private NestedScrollView nsv ;
+    private RadioButton cropRBTrue , cropRBFalse ,selectFromAblumRB , selectFromDirectoryRB;
+    private EditText cropWidthET , cropHeightET ,selectLimitET;
+    private Button clearCacheButton , cameraButton , selectButton;
     private RecyclerView recycler ;
-    private Button filesButton , photosButton ;
 
     private PAdapter mAdapter ;
 
@@ -43,9 +57,26 @@ public class MainActivity extends AppCompatActivity implements OnPhotorListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        nsv = findViewById(R.id.nsv);
+        cropRBTrue = findViewById(R.id.cropRBTrue);
+        cropRBFalse = findViewById(R.id.cropRBFalse);
+        selectFromAblumRB = findViewById(R.id.selectFromAblumRB);
+        selectFromDirectoryRB = findViewById(R.id.selectFromDirectoryRB);
+        cropWidthET = findViewById(R.id.cropWidthET);
+        cropHeightET = findViewById(R.id.cropHeightET);
+        selectLimitET = findViewById(R.id.selectLimitET);
+        clearCacheButton = findViewById(R.id.clearCacheButton);
+        cameraButton = findViewById(R.id.cameraButton);
+        selectButton = findViewById(R.id.selectButton);
         recycler = findViewById(R.id.recycler);
-        filesButton = findViewById(R.id.filesButton);
-        photosButton = findViewById(R.id.photosButton);
+
+        cropRBTrue.setOnClickListener(this);
+        cropRBFalse.setOnClickListener(this);
+        selectFromAblumRB.setOnClickListener(this);
+        selectFromDirectoryRB.setOnClickListener(this);
+        clearCacheButton.setOnClickListener(this);
+        cameraButton.setOnClickListener(this);
+        selectButton.setOnClickListener(this);
 
 
         recycler.setLayoutManager(new GridLayoutManager(this,3){
@@ -86,21 +117,50 @@ public class MainActivity extends AppCompatActivity implements OnPhotorListener{
     }
 
     public void onClick(View v){
+        int cropWidth , cropHeight = 0 ;
+        if(cropRBTrue.isChecked()){
+            cropWidth = Integer.valueOf(cropWidthET.getText().toString());
+            cropHeight = Integer.valueOf(cropHeightET.getText().toString());
+        }else{
+            cropWidth = cropHeight = 0 ;
+        }
+
+
+        int limit = Integer.valueOf(selectLimitET.getText().toString());
+
+
         switch(v.getId()){
-            case R.id.filesButton:
-                Log.i("aaa", "onClick: filesButton");
-                Photor.getInstance()
+            case R.id.clearCacheButton:
+                if(Photor.getInstance()
                         .context(this)
-                        .crop(500,500)
-                        .onPhotorListener(this)
-                        .requestImgsFromAlbum(9);
+                        .clearCache()){
+                    Toast.makeText(this,"清除成功",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this,"清除失败",Toast.LENGTH_SHORT).show();
+                }
                 break;
-            case R.id.photosButton:
+            case R.id.cameraButton:
                 Photor.getInstance()
                         .context(this)
-//                        .crop(500,500)
+                        .crop(cropWidth,cropHeight)
                         .onPhotorListener(this)
-                        .requestImgs(9);
+                        .requestImgFromCamera();
+                break;
+            case R.id.selectButton:
+                if(selectFromAblumRB.isChecked()){
+                    Photor.getInstance()
+                            .context(this)
+                            .crop(cropWidth,cropHeight)
+                            .onPhotorListener(this)
+                            .requestImgsFromAlbum(limit);
+                }else{
+                    /*从文件*/
+                    Photor.getInstance()
+                            .context(this)
+                            .crop(cropWidth,cropHeight)
+                            .onPhotorListener(this)
+                            .requestImgsFromDirectory(limit);
+                }
                 break;
         }
     }
@@ -113,6 +173,18 @@ public class MainActivity extends AppCompatActivity implements OnPhotorListener{
 //            Log.i("aaa", "onSuccess: "+imgBean.toString());
 //        }
 //        Log.i("aaa", "onSuccess: EMSource = " + source);
+
+        int w = (DensityUtil.getScreenWidth(MainActivity.this) -
+                DensityUtil.dp2px(MainActivity.this,48) ) / 3 ;
+        nsv.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                nsv.smoothScrollBy(0,(IMGs.size() / 3) * (w + DensityUtil.dp2px(MainActivity.this,12)));
+                nsv.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+
+
     }
 
     class PAdapter extends RecyclerView.Adapter<PAdapter.ViewHolder>{

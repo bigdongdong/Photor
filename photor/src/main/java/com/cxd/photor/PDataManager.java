@@ -51,11 +51,12 @@ public class PDataManager {
     }
 
     /*初始化，赋值limit，重置数据集合以及选中集合*/
-    public void init(int limit){
+    public synchronized void init(int limit){
         mLimit = limit ;
         mImgList = null ;
         mBucketList = null ;
         mSelectedList = null ;
+        activities = new ArrayList<>() ;
     }
 
     /*从cursor获取imgs*/
@@ -79,11 +80,11 @@ public class PDataManager {
         }
     }
 
-    /*更新数据集*/
-    public synchronized void updateImgs(Context context){
-        mImgList = null ;
-        initImgs(context);
-    }
+//    /*更新数据集*/
+//    public synchronized void updateImgs(Context context){
+//        mImgList = null ;
+//        initImgs(context);
+//    }
 
     /*获取文件夹数据集*/
     public synchronized List<BucketBean> getBuckets(Context context) {
@@ -192,7 +193,11 @@ public class PDataManager {
         sendEvent(Constant.EVENTBOX_UPDATE);
     }
 
-    /*通过eventbox发送通知*/
+    /**
+     * 通过eventbox发送通知，通知对象：
+     * {@link BucketActivity } & {@link PhotoActivity}
+     * @param event
+     */
     private void sendEvent(int event){
         switch(event){
             case Constant.EVENTBOX_UPDATE:
@@ -222,6 +227,7 @@ public class PDataManager {
         EventBox.getDefault().send(mSelectedList, Photor.class);
     }
 
+    /*避免EventBox粘性事件解决方案*/
     private List<Class<? extends Activity>> activities = new ArrayList<>();
     public synchronized void addActivity(Activity activity){
         activities.add(activity.getClass());

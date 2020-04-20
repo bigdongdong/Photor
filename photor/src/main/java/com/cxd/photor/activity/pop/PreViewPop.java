@@ -13,6 +13,10 @@ import com.bumptech.glide.Glide;
 import com.cxd.photor.R;
 import com.cxd.photor.utils.DensityUtil;
 
+/**
+ * create by cxd on 2020/4/16
+ * 预览弹窗
+ */
 public class PreViewPop extends ShadowPopupWindow{
 
     private ImageView iv ;

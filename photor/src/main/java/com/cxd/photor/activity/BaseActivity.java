@@ -25,7 +25,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutId());
+        if(getLayoutId() != 0){
+            setContentView(getLayoutId());
+        }
 
         context = this ;
         PDataManager.getInstance().addActivity(this);
@@ -42,9 +44,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         /*权限判断*/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
             if((context instanceof BucketActivity || context instanceof PhotoActivity)
-                    && ContextCompat.checkSelfPermission(this, "android.permission.READ_EXTERNAL_STORAGE") ==
+                    && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) ==
                     PackageManager.PERMISSION_DENIED){ //相册选择需要文件读取权限
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+                return;
+            }
+            if((context instanceof CameraActivity)
+                    && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
+                    PackageManager.PERMISSION_DENIED){
+                requestPermissions(new String[]{Manifest.permission.CAMERA}, 0);
                 return;
             }
         }
@@ -83,10 +91,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void finish() {
         super.finish();
         /*走onCancel回调*/
-        if(PDataManager.getInstance().getSelectedImgs() == null
-                || PDataManager.getInstance().getSelectedImgs().size() == 0){
-            Photor.getInstance().reset(); //重置
-        }
+//        if(PDataManager.getInstance().getSelectedImgs() == null
+//                || PDataManager.getInstance().getSelectedImgs().size() == 0){
+//            Photor.getInstance().reset(); //重置
+//        }
 
         PDataManager.getInstance().removeActivity(this);
     }
