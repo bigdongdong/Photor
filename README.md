@@ -33,7 +33,6 @@
 ```
 
 # 使用说明
-## java :
 ```java
 	//设置选择回调
 	OnPhotorListener onPhotorListener = new OnPhotorListener() {
