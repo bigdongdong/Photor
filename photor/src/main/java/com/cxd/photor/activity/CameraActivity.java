@@ -46,7 +46,8 @@ public class CameraActivity extends BaseActivity{
 
         //判断当前Android版本
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-            photoUri = FileProvider.getUriForFile(this,"com.cxd.photor.FileProvider",outputImage);
+            photoUri = FileProvider.getUriForFile(this,
+                    this.getApplication().getApplicationInfo().processName+".FileProvider",outputImage);
         }else {
             photoUri = Uri.fromFile(outputImage);
         }
