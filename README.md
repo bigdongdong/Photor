@@ -1,4 +1,4 @@
-# Photor
+﻿# Photor
 图片选择器，支持二级选择，支持相机拍照，自带裁剪功能</br>
 内部引用框架：[Glide](https://github.com/bumptech/glide)、[EventBox](https://github.com/bigdongdong/EventBox)、[ClipView](https://github.com/bigdongdong/ClipView)
 
@@ -28,7 +28,7 @@
   }
   
   dependencies {
-	  implementation 'com.github.bigdongdong:Photor:1.0' //添加依赖
+	  implementation 'com.github.bigdongdong:Photor:1.5' //添加依赖
   }
 ```
 
