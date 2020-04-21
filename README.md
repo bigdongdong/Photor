@@ -28,7 +28,7 @@
   }
   
   dependencies {
-	  implementation 'com.github.bigdongdong:Photor:1.5' //添加依赖
+	  implementation 'com.github.bigdongdong:Photor:2.0' //添加依赖
   }
 ```
 
