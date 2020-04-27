@@ -2,10 +2,12 @@
 图片选择器，支持二级选择，支持相机拍照，自带裁剪功能</br>
 内部引用框架：[Glide](https://github.com/bumptech/glide)、[EventBox](https://github.com/bigdongdong/EventBox)、[ClipView](https://github.com/bigdongdong/ClipView)
 
+<!--
 # demo下载
 右击 -> 链接另存为</br>
 [photor.apk](https://github.com/bigdongdong/Photor/blob/master/preview/photor.apk)</br></br>
 <img  width = "300" src = "https://github.com/bigdongdong/Photor/blob/master/preview/demo_1.jpg"></img>
+-->
 
 # 截图预览
 ## 图片选择（文件夹、相册、预览）
