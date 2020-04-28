@@ -83,9 +83,10 @@ public class CameraActivity extends BaseActivity{
                     ib.setBucketName("Photor");
                     PDataManager.getInstance().addImg(ib);
                     PDataManager.getInstance().commit();
-                    finish();
                     break;
             }
         }
+
+        finish();
     }
 }
