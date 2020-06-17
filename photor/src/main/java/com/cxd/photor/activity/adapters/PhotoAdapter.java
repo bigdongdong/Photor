@@ -36,7 +36,8 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
 
     private final int vw ;
     private final RequestOptions options = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE)
-            .placeholder(new ColorDrawable(Color.parseColor("#484848")));
+            .placeholder(new ColorDrawable(Color.parseColor("#484848")))
+            .dontAnimate(); //去掉动画
 
     public PhotoAdapter(Context context) {
         this.context = context;

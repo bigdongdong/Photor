@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#333333"
-    tools:context=".activity.PhotoActivity">
+    tools:context=".activity.PPhotoActivity">
 
     <include
         layout="@layout/layout_toolbar"

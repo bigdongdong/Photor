@@ -1,7 +1,6 @@
 package com.cxd.photor.activity.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
@@ -13,14 +12,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cxd.photor.R;
-import com.cxd.photor.activity.PhotoActivity;
+import com.cxd.photor.activity.PPhotoActivity;
 import com.cxd.photor.model.BucketBean;
 import com.cxd.photor.model.ImgBean;
-import com.cxd.photor.utils.Constant;
 import com.cxd.photor.utils.DensityUtil;
 import com.cxd.photor.activity.views.RoundImageView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,7 +69,7 @@ public class BucketAdapter extends RecyclerView.Adapter<BucketAdapter.ViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PhotoActivity.jump(context,bean.getName(),bean.getList());
+                PPhotoActivity.jump(context,bean.getName(),bean.getList());
             }
         });
 

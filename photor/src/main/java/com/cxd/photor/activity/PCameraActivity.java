@@ -7,18 +7,13 @@ import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 
-import com.cxd.eventbox.EventBox;
 import com.cxd.photor.PDataManager;
-import com.cxd.photor.Photor;
 import com.cxd.photor.model.ImgBean;
 
 import java.io.File;
 
-public class CameraActivity extends BaseActivity{
+public class PCameraActivity extends PBaseActivity {
 
     private File outputImage ;
     private Uri photoUri;
@@ -64,7 +59,7 @@ public class CameraActivity extends BaseActivity{
 
     public static void jump(Context context){
         if(context != null){
-            Intent intent = new Intent(context,CameraActivity.class);
+            Intent intent = new Intent(context, PCameraActivity.class);
             context.startActivity(intent);
         }
     }

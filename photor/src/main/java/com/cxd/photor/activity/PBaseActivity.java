@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -14,13 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.cxd.eventbox.EventBox;
 import com.cxd.photor.PDataManager;
-import com.cxd.photor.Photor;
 import com.cxd.photor.utils.DensityUtil;
 
 /**
  * create by cxd on 2020/4/3
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class PBaseActivity extends AppCompatActivity {
     protected Activity context ;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,13 +41,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         /*权限判断*/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
-            if((context instanceof BucketActivity || context instanceof PhotoActivity)
+            if((context instanceof PBucketActivity || context instanceof PPhotoActivity)
                     && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) ==
                     PackageManager.PERMISSION_DENIED){ //相册选择需要文件读取权限
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
                 return;
             }
-            if((context instanceof CameraActivity)
+            if((context instanceof PCameraActivity)
                     && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
                     PackageManager.PERMISSION_DENIED){
                 requestPermissions(new String[]{Manifest.permission.CAMERA}, 0);

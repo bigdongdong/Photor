@@ -2,15 +2,13 @@ package com.cxd.photor;
 
 
 import android.content.Context;
-import android.provider.ContactsContract;
-import android.util.Log;
 
 import com.cxd.eventbox.EventBox;
 import com.cxd.eventbox.EventBoxSubscribe;
-import com.cxd.photor.activity.BucketActivity;
-import com.cxd.photor.activity.CameraActivity;
-import com.cxd.photor.activity.ClipActivity;
-import com.cxd.photor.activity.PhotoActivity;
+import com.cxd.photor.activity.PBucketActivity;
+import com.cxd.photor.activity.PCameraActivity;
+import com.cxd.photor.activity.PClipActivity;
+import com.cxd.photor.activity.PPhotoActivity;
 import com.cxd.photor.model.ImgBean;
 
 import java.io.File;
@@ -77,7 +75,7 @@ public class Photor implements IPhotor{
     @Override
     public void requestImgFromCamera() {
         mSource = EMSource.CAMERA ;
-        CameraActivity.jump(mContext);
+        PCameraActivity.jump(mContext);
     }
 
     /**
@@ -87,7 +85,7 @@ public class Photor implements IPhotor{
     @Override
     public void requestImgsFromAlbum(int limit) {
         mSource = EMSource.ALBUM ;
-        PhotoActivity.jump(mContext,limit);
+        PPhotoActivity.jump(mContext,limit);
     }
 
     /**
@@ -97,7 +95,7 @@ public class Photor implements IPhotor{
     @Override
     public void requestImgsFromDirectory(int limit) {
         mSource = EMSource.ALBUM ;
-        BucketActivity.jump(mContext,limit);
+        PBucketActivity.jump(mContext,limit);
     }
 
     /**
@@ -137,7 +135,7 @@ public class Photor implements IPhotor{
 
         /*判断裁剪*/
         if(mCropWidth > 0 && mCropHeight > 0){
-            ClipActivity.jump(mContext,imgs,mCropWidth,mCropHeight);
+            PClipActivity.jump(mContext,imgs,mCropWidth,mCropHeight);
             mCropWidth = mCropHeight = 0 ;
         }else{
             mPhotoListener.onSuccess(imgs,mSource);

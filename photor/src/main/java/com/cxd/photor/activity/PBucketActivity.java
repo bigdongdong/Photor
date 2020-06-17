@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,16 +13,13 @@ import com.cxd.eventbox.EventBoxSubscribe;
 import com.cxd.photor.PDataManager;
 import com.cxd.photor.R;
 import com.cxd.photor.activity.adapters.BucketAdapter;
-import com.cxd.photor.model.ImgBean;
 import com.cxd.photor.activity.views.ConfirmView;
 import com.cxd.photor.utils.Constant;
-
-import java.util.ArrayList;
 
 /**
  * create by cxd on 2020/4/7
  */
-public class BucketActivity extends BaseActivity {
+public class PBucketActivity extends PBaseActivity {
 
     private ImageView closeIV ;
     private TextView titleTV ;
@@ -73,7 +69,7 @@ public class BucketActivity extends BaseActivity {
     public static void jump(Context context , int limit){
         PDataManager.getInstance().init(limit);
         if(context != null){
-            Intent intent = new Intent(context,BucketActivity.class);
+            Intent intent = new Intent(context, PBucketActivity.class);
             context.startActivity(intent);
         }
     }

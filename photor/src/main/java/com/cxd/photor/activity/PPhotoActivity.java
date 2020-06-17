@@ -6,7 +6,6 @@ import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,13 +22,12 @@ import com.cxd.photor.utils.DensityUtil;
 import com.cxd.photor.activity.views.ConfirmView;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * create by cxd on 2020/4/7
  */
-public class PhotoActivity extends BaseActivity {
+public class PPhotoActivity extends PBaseActivity {
 
     private ImageView closeIV ;
     private TextView titleTV ;
@@ -116,7 +114,7 @@ public class PhotoActivity extends BaseActivity {
      */
     public static void jump(Context context ,String bucketName ,List<ImgBean> dataList){
         if(context != null){
-            Intent intent = new Intent(context,PhotoActivity.class);
+            Intent intent = new Intent(context, PPhotoActivity.class);
             intent.putExtra(Constant.INTENT_BUCKET_NAME,bucketName);
             intent.putExtra(Constant.INTENT_PHOTO_LIST, (Serializable) dataList);
             context.startActivity(intent);
@@ -131,7 +129,7 @@ public class PhotoActivity extends BaseActivity {
     public static void jump(Context context , int limit){
         PDataManager.getInstance().init(limit);
         if(context != null){
-            Intent intent = new Intent(context,PhotoActivity.class);
+            Intent intent = new Intent(context, PPhotoActivity.class);
             context.startActivity(intent);
         }
     }

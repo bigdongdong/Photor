@@ -5,11 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Build;
 import android.provider.MediaStore;
-import android.util.Log;
 
 import com.cxd.eventbox.EventBox;
-import com.cxd.photor.activity.BucketActivity;
-import com.cxd.photor.activity.PhotoActivity;
+import com.cxd.photor.activity.PBucketActivity;
+import com.cxd.photor.activity.PPhotoActivity;
 import com.cxd.photor.model.BucketBean;
 import com.cxd.photor.model.ImgBean;
 import com.cxd.photor.utils.Constant;
@@ -20,7 +19,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * create by cxd on 2020/4/7
@@ -195,22 +193,22 @@ public class PDataManager {
 
     /**
      * 通过eventbox发送通知，通知对象：
-     * {@link BucketActivity } & {@link PhotoActivity}
+     * {@link PBucketActivity } & {@link PPhotoActivity}
      * @param event
      */
     private void sendEvent(int event){
         switch(event){
             case Constant.EVENTBOX_UPDATE:
             case Constant.EVENTBOX_COMMIT_FINISH:
-                if(activities.contains(BucketActivity.class)){
-                    EventBox.getDefault().send(event,BucketActivity.class);
+                if(activities.contains(PBucketActivity.class)){
+                    EventBox.getDefault().send(event, PBucketActivity.class);
                 }
-                if(activities.contains(PhotoActivity.class)){
-                    EventBox.getDefault().send(event,PhotoActivity.class);
+                if(activities.contains(PPhotoActivity.class)){
+                    EventBox.getDefault().send(event, PPhotoActivity.class);
                 }
                 break;
             case Constant.EVENTBOX_EXCEED_LIMIT:
-                EventBox.getDefault().send(event, PhotoActivity.class);
+                EventBox.getDefault().send(event, PPhotoActivity.class);
                 break;
         }
 

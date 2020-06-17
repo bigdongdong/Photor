@@ -3,9 +3,6 @@ package com.cxd.photor.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -22,13 +19,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * create by cxd on 2020/4/6
  */
-public class ClipActivity extends BaseActivity {
+public class PClipActivity extends PBaseActivity {
 
     private ClipImageView civ ;
     private TextView cancelTV , confirmTV ;
@@ -40,7 +35,7 @@ public class ClipActivity extends BaseActivity {
     public static void jump(Context context , ArrayList<ImgBean> imgs , int width , int height ){
         PCropOption pCropOption = new PCropOption(width,height);
         if(context != null && imgs != null && imgs.size() >0){
-            Intent intent = new Intent(context,ClipActivity.class);
+            Intent intent = new Intent(context, PClipActivity.class);
             intent.putExtra("imgs",imgs);
             intent.putExtra("pCropOption",pCropOption);
             context.startActivity(intent);

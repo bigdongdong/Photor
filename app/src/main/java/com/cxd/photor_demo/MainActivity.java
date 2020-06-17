@@ -2,12 +2,7 @@ package com.cxd.photor_demo;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Rect;
-import android.media.Image;
-import android.os.Build;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -25,19 +19,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cxd.photor.EMSource;
 import com.cxd.photor.OnPhotorListener;
 import com.cxd.photor.Photor;
-import com.cxd.photor.activity.CameraActivity;
 import com.cxd.photor.model.ImgBean;
 import com.cxd.photor.utils.DensityUtil;
 
-import java.io.File;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnPhotorListener , View.OnClickListener {

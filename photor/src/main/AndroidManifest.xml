@@ -9,15 +9,15 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application>
-        <activity android:name=".activity.CameraActivity"></activity>
+        <activity android:name=".activity.PCameraActivity"></activity>
         <activity
-            android:name=".activity.ClipActivity"
+            android:name=".activity.PClipActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name=".activity.PhotoActivity"
+            android:name=".activity.PPhotoActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name=".activity.BucketActivity"
+            android:name=".activity.PBucketActivity"
             android:launchMode="singleTop" />
         <provider
             android:name="android.support.v4.content.FileProvider"

@@ -6,7 +6,7 @@ package com.cxd.photor.utils;
  */
 public class Constant {
 
-    /*BucketActivity -> PhotoActivity*/
+    /*PBucketActivity -> PPhotoActivity*/
     public final static String INTENT_PHOTO_LIST = "intent_photo_list"; //对应bucket下的相片集
     public final static String INTENT_BUCKET_NAME = "intent_bucket_name"; //对应的bucket名
 
