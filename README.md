@@ -6,8 +6,10 @@
 # demo下载
 右击 -> 链接另存为</br>
 [photor.apk](https://github.com/bigdongdong/Photor/blob/master/preview/photor.apk)</br></br>
-<img  width = "300" src = "https://github.com/bigdongdong/Photor/blob/master/preview/demo_1.jpg"></img>
 -->
+# demo预览
+<img  width = "300" src = "https://github.com/bigdongdong/Photor/blob/master/preview/demo_1.jpg"></img>
+
 
 # 截图预览
 ## 图片选择（文件夹、相册、预览）
