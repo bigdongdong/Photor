@@ -10,7 +10,7 @@ import android.util.AttributeSet;
  * create by cxd on 2020/4/7
  * 圆角ImageView
  */
-public class RoundImageView extends android.support.v7.widget.AppCompatImageView {
+public class RoundImageView extends androidx.appcompat.widget.AppCompatImageView {
     //圆角弧度
     private float[] rids = {dip2px(8), dip2px(8), dip2px(8), dip2px(8),
             dip2px(8), dip2px(8), dip2px(8), dip2px(8)};

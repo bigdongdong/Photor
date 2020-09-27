@@ -13,7 +13,7 @@ import com.cxd.photor.utils.DensityUtil;
 /**
  * create by cxd on 2020/4/7
  */
-public class ConfirmView extends android.support.v7.widget.AppCompatTextView {
+public class ConfirmView extends androidx.appcompat.widget.AppCompatTextView {
     private Context context ;
 
     public ConfirmView(Context context, AttributeSet attrs) {

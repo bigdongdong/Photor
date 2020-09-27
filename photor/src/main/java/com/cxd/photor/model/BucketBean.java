@@ -1,8 +1,6 @@
 package com.cxd.photor.model;
 
-import android.support.annotation.NonNull;
-
-import com.cxd.photor.model.ImgBean;
+import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
